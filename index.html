@@ -45,19 +45,21 @@
     }
 
     function applyFilter(index, filter) {
-      var obj = canvas.getActiveObject()
-      obj.filters[index] = filter
-      obj.applyFilters()
+      for (var activeObject of canvas.getActiveObjects()) {
+        activeObject.filters[index] = filter
+        activeObject.applyFilters()
+      }
       canvas.renderAll()
     }
 
     function applyFilterValue(index, prop, value) {
-      var obj = canvas.getActiveObject()
-      if (obj.filters[index]) {
-        obj.filters[index][prop] = value
-        obj.applyFilters()
-        canvas.renderAll()
+      for (var activeObject of canvas.getActiveObjects()) {
+        if (activeObject.filters[index]) {
+          activeObject.filters[index][prop] = value
+          activeObject.applyFilters()
+        }
       }
+      canvas.renderAll()
     }
 
     fabric.Object.prototype.padding = 5
@@ -74,10 +76,13 @@
           })
 
         var filters = ['brightness', 'contrast', 'blackwhite']
+        canvas.getActiveObjects()
 
-        for (var i = 0; i < filters.length; i++) {
-          $(filters[i]) && (
-            $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+        for (var activeObject of canvas.getActiveObjects()) {
+          for (var i = 0; i < filters.length; i++) {
+            $(filters[i]) && (
+              $(filters[i]).checked = !!activeObject.filters[i])
+          }
         }
       },
       'selection:cleared': function () {
