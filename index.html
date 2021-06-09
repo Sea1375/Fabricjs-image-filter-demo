@@ -46,7 +46,7 @@
 
     function applyFilter(index, filter) {
       var obj = canvas.getActiveObject()
-      obj.filters.push(filter)
+      obj.filters[index] = filter
       obj.applyFilters()
       canvas.renderAll()
     }
@@ -75,10 +75,10 @@
 
         var filters = ['brightness', 'contrast', 'blackwhite']
 
-        // for (var i = 0; i < filters.length; i++) {
-        //   $(filters[i]) && (
-        //     $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
-        // }
+        for (var i = 0; i < filters.length; i++) {
+          $(filters[i]) && (
+            $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+        }
       },
       'selection:cleared': function () {
         fabric.util.toArray(document.getElementsByTagName('input'))
