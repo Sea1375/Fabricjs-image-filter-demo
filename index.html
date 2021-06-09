@@ -57,11 +57,6 @@
       canvas.renderAll()
     }
 
-    function getFilter(index) {
-      var obj = canvas.getActiveObject()
-      return obj.filters[index]
-    }
-
     function applyFilterValue(index, prop, value) {
       var obj = canvas.getActiveObject()
       if (obj.filters[index]) {
@@ -83,31 +78,31 @@
     var canvas = this.__canvas = new fabric.Canvas('c'),
       f = fabric.Image.filters
 
-    canvas.on({
-      'selection:created': function () {
-        fabric.util.toArray(document.getElementsByTagName('input'))
-          .forEach(function (el) {
-            el.disabled = false
-          })
-
-        var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
-          'brightness', 'contrast', 'saturation', 'noise', 'vintage',
-          'pixelate', 'blur', 'sharpen', 'emboss', 'technicolor',
-          'polaroid', 'blend-color', 'gamma', 'kodachrome',
-          'blackwhite', 'blend-image', 'hue', 'resize']
-
-        for (var i = 0; i < filters.length; i++) {
-          $(filters[i]) && (
-            $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
-        }
-      },
-      'selection:cleared': function () {
-        fabric.util.toArray(document.getElementsByTagName('input'))
-          .forEach(function (el) {
-            el.disabled = true
-          })
-      }
-    })
+    // canvas.on({
+    //   'selection:created': function () {
+    //     fabric.util.toArray(document.getElementsByTagName('input'))
+    //       .forEach(function (el) {
+    //         el.disabled = false
+    //       })
+    //
+    //     var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
+    //       'brightness', 'contrast', 'saturation', 'noise', 'vintage',
+    //       'pixelate', 'blur', 'sharpen', 'emboss', 'technicolor',
+    //       'polaroid', 'blend-color', 'gamma', 'kodachrome',
+    //       'blackwhite', 'blend-image', 'hue', 'resize']
+    //
+    //     for (var i = 0; i < filters.length; i++) {
+    //       $(filters[i]) && (
+    //         $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+    //     }
+    //   },
+    //   'selection:cleared': function () {
+    //     fabric.util.toArray(document.getElementsByTagName('input'))
+    //       .forEach(function (el) {
+    //         el.disabled = true
+    //       })
+    //   }
+    // })
 
     fabric.Image.fromURL('./assets/pug.jpg', function (img) {
       var oImg = img.set({left: 0, top: 0}).scale(0.25)
@@ -121,33 +116,25 @@
       var oImg = img.set({left: 0, top: 270}).scale(0.2)
       canvas.add(oImg)
     })
-    fabric.Image.fromURL('./assets/dragon2.jpg', function (img) {
-      var oImg = img.set({left: 0, top: 500}).scale(0.2)
-      canvas.add(oImg)
-    })
-    fabric.Image.fromURL('./assets/dragon2.jpg', function (img) {
-      var oImg = img.set({left: 150, top: 500}).scale(0.2)
-      canvas.add(oImg)
-    })
-    $('blackwhite').onclick = function () {
-      applyFilter(19, this.checked && new f.BlackWhite())
-    }
-    $('brightness').onclick = function () {
-      applyFilter(5, this.checked && new f.Brightness({
-        brightness: parseFloat($('brightness-value').value)
-      }))
-    }
-    $('brightness-value').oninput = function () {
-      applyFilterValue(5, 'brightness', parseFloat(this.value))
-    }
-    $('contrast').onclick = function () {
-      applyFilter(6, this.checked && new f.Contrast({
-        contrast: parseFloat($('contrast-value').value)
-      }))
-    }
-    $('contrast-value').oninput = function () {
-      applyFilterValue(6, 'contrast', parseFloat(this.value))
-    }
+    // $('blackwhite').onclick = function () {
+    //   applyFilter(19, this.checked && new f.BlackWhite())
+    // }
+    // $('brightness').onclick = function () {
+    //   applyFilter(5, this.checked && new f.Brightness({
+    //     brightness: parseFloat($('brightness-value').value)
+    //   }))
+    // }
+    // $('brightness-value').oninput = function () {
+    //   applyFilterValue(5, 'brightness', parseFloat(this.value))
+    // }
+    // $('contrast').onclick = function () {
+    //   applyFilter(6, this.checked && new f.Contrast({
+    //     contrast: parseFloat($('contrast-value').value)
+    //   }))
+    // }
+    // $('contrast-value').oninput = function () {
+    //   applyFilterValue(6, 'contrast', parseFloat(this.value))
+    // }
   })()
 </script>
 </html>
