@@ -47,13 +47,7 @@
     function applyFilter(index, filter) {
       var obj = canvas.getActiveObject()
       obj.filters[index] = filter
-      var timeStart = +new Date()
       obj.applyFilters()
-      var timeEnd = +new Date()
-      var dimString = canvas.getActiveObject().width + ' x ' +
-        canvas.getActiveObject().height
-      $('bench').innerHTML = dimString + 'px ' +
-        parseFloat(timeEnd - timeStart) + 'ms'
       canvas.renderAll()
     }
 
@@ -85,11 +79,11 @@
             el.disabled = false
           })
 
-        var filters = ['brightness', 'contrast', 'blackwhite']
-        for (var i = 0; i < filters.length; i++) {
-          $(filters[i]) && (
-            $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
-        }
+        // var filters = ['brightness', 'contrast', 'blackwhite']
+        // for (var i = 0; i < filters.length; i++) {
+        //   $(filters[i]) && (
+        //     $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+        // }
       },
       'selection:cleared': function () {
         fabric.util.toArray(document.getElementsByTagName('input'))
@@ -111,25 +105,25 @@
       var oImg = img.set({left: 0, top: 270}).scale(0.2)
       canvas.add(oImg)
     })
-    // $('blackwhite').onclick = function () {
-    //   applyFilter(19, this.checked && new f.BlackWhite())
-    // }
-    // $('brightness').onclick = function () {
-    //   applyFilter(5, this.checked && new f.Brightness({
-    //     brightness: parseFloat($('brightness-value').value)
-    //   }))
-    // }
-    // $('brightness-value').oninput = function () {
-    //   applyFilterValue(5, 'brightness', parseFloat(this.value))
-    // }
-    // $('contrast').onclick = function () {
-    //   applyFilter(6, this.checked && new f.Contrast({
-    //     contrast: parseFloat($('contrast-value').value)
-    //   }))
-    // }
-    // $('contrast-value').oninput = function () {
-    //   applyFilterValue(6, 'contrast', parseFloat(this.value))
-    // }
+    $('blackwhite').onclick = function () {
+      applyFilter('blackwhite', this.checked && new f.BlackWhite())
+    }
+    $('brightness').onclick = function () {
+      applyFilter(5, this.checked && new f.Brightness({
+        brightness: parseFloat($('brightness-value').value)
+      }))
+    }
+    $('brightness-value').oninput = function () {
+      applyFilterValue(5, 'brightness', parseFloat(this.value))
+    }
+    $('contrast').onclick = function () {
+      applyFilter(6, this.checked && new f.Contrast({
+        contrast: parseFloat($('contrast-value').value)
+      }))
+    }
+    $('contrast-value').oninput = function () {
+      applyFilterValue(6, 'contrast', parseFloat(this.value))
+    }
   })()
 </script>
 </html>
