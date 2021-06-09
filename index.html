@@ -78,31 +78,31 @@
     var canvas = this.__canvas = new fabric.Canvas('c'),
       f = fabric.Image.filters
 
-    // canvas.on({
-    //   'selection:created': function () {
-    //     fabric.util.toArray(document.getElementsByTagName('input'))
-    //       .forEach(function (el) {
-    //         el.disabled = false
-    //       })
-    //
-    //     var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
-    //       'brightness', 'contrast', 'saturation', 'noise', 'vintage',
-    //       'pixelate', 'blur', 'sharpen', 'emboss', 'technicolor',
-    //       'polaroid', 'blend-color', 'gamma', 'kodachrome',
-    //       'blackwhite', 'blend-image', 'hue', 'resize']
-    //
-    //     for (var i = 0; i < filters.length; i++) {
-    //       $(filters[i]) && (
-    //         $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
-    //     }
-    //   },
-    //   'selection:cleared': function () {
-    //     fabric.util.toArray(document.getElementsByTagName('input'))
-    //       .forEach(function (el) {
-    //         el.disabled = true
-    //       })
-    //   }
-    // })
+    canvas.on({
+      'selection:created': function () {
+        fabric.util.toArray(document.getElementsByTagName('input'))
+          .forEach(function (el) {
+            el.disabled = false
+          })
+
+        // var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
+        //   'brightness', 'contrast', 'saturation', 'noise', 'vintage',
+        //   'pixelate', 'blur', 'sharpen', 'emboss', 'technicolor',
+        //   'polaroid', 'blend-color', 'gamma', 'kodachrome',
+        //   'blackwhite', 'blend-image', 'hue', 'resize']
+        //
+        // for (var i = 0; i < filters.length; i++) {
+        //   $(filters[i]) && (
+        //     $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+        // }
+      },
+      'selection:cleared': function () {
+        fabric.util.toArray(document.getElementsByTagName('input'))
+          .forEach(function (el) {
+            el.disabled = true
+          })
+      }
+    })
 
     fabric.Image.fromURL('./assets/pug.jpg', function (img) {
       var oImg = img.set({left: 0, top: 0}).scale(0.25)
