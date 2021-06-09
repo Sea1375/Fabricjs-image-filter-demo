@@ -85,16 +85,11 @@
             el.disabled = false
           })
 
-        // var filters = ['grayscale', 'invert', 'remove-color', 'sepia', 'brownie',
-        //   'brightness', 'contrast', 'saturation', 'noise', 'vintage',
-        //   'pixelate', 'blur', 'sharpen', 'emboss', 'technicolor',
-        //   'polaroid', 'blend-color', 'gamma', 'kodachrome',
-        //   'blackwhite', 'blend-image', 'hue', 'resize']
-        //
-        // for (var i = 0; i < filters.length; i++) {
-        //   $(filters[i]) && (
-        //     $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
-        // }
+        var filters = ['brightness', 'contrast', 'blackwhite']
+        for (var i = 0; i < filters.length; i++) {
+          $(filters[i]) && (
+            $(filters[i]).checked = !!canvas.getActiveObject().filters[i])
+        }
       },
       'selection:cleared': function () {
         fabric.util.toArray(document.getElementsByTagName('input'))
